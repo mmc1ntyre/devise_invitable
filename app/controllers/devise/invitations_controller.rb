@@ -55,6 +55,10 @@ class Devise::InvitationsController < DeviseController
 
   protected
 
+  def build_resource(hash=nil)
+    self.resource = resource_class.new_with_session(hash || {}, session)
+  end
+
   def invite_resource(&block)
     resource_class.invite!(invite_params, current_inviter, &block)
   end
